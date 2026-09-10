@@ -1,0 +1,125 @@
+{
+  "entities": {
+    "Farmer": {
+      "title": "Farmer",
+      "description": "Authenticated farmer profile and verification status",
+      "type": "object",
+      "properties": {
+        "fullName": {
+          "type": "string",
+          "description": "Full name of the farmer"
+        },
+        "aadhaar": {
+          "type": "string",
+          "description": "Aadhaar number or masked Aadhaar"
+        },
+        "mobileNumber": {
+          "type": "string",
+          "description": "Registered mobile number"
+        },
+        "district": {
+          "type": "string",
+          "description": "Farmer district"
+        },
+        "state": {
+          "type": "string",
+          "description": "Farmer state"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of last update"
+        }
+      },
+      "required": ["fullName"]
+    },
+    "MandiToken": {
+      "title": "MandiToken",
+      "description": "Agricultural produce mandi delivery appointment token pass",
+      "type": "object",
+      "properties": {
+        "tokenNumber": {
+          "type": "string",
+          "description": "Unique token number (e.g. TKN-2026-XXXX)"
+        },
+        "farmerId": {
+          "type": "string",
+          "description": "Farmer UID or identifier"
+        },
+        "cropType": {
+          "type": "string",
+          "description": "Name of crop (Wheat, Paddy, Mustard, etc.)"
+        },
+        "quantityQuintals": {
+          "type": "number",
+          "description": "Quantity in quintals"
+        },
+        "totalAmount": {
+          "type": "number",
+          "description": "Calculated MSP total amount"
+        },
+        "scheduledDate": {
+          "type": "string",
+          "description": "Arrival date"
+        },
+        "scheduledSlot": {
+          "type": "string",
+          "description": "Arrival time slot"
+        },
+        "stageName": {
+          "type": "string",
+          "description": "Current procurement stage"
+        },
+        "status": {
+          "type": "string",
+          "description": "Token status (WAITING, IN_PROGRESS, COMPLETED)"
+        },
+        "lastSynced": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when synced"
+        }
+      },
+      "required": ["tokenNumber", "cropType"]
+    },
+    "AiChat": {
+      "title": "AiChat",
+      "description": "AI Krishi Saathi advisory assistant conversation record",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "UID of the user chatting"
+        },
+        "lastMessage": {
+          "type": "string",
+          "description": "Snippet of the last response"
+        },
+        "messageCount": {
+          "type": "number",
+          "description": "Total message count"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of chat update"
+        }
+      },
+      "required": ["userId"]
+    }
+  },
+  "firestore": {
+    "/farmers/{farmerId}": {
+      "schema": "Farmer",
+      "description": "Farmer profile records keyed by user UID"
+    },
+    "/mandi_tokens/{tokenId}": {
+      "schema": "MandiToken",
+      "description": "Procurement token records keyed by token number"
+    },
+    "/ai_chats/{chatId}": {
+      "schema": "AiChat",
+      "description": "Conversational assistant history for advisory support"
+    }
+  }
+}

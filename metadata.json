@@ -1,0 +1,11 @@
+{
+  "name": "Copy of  Krishi Annapurna ",
+  "description": "Realtime agricultural procurement and queue management portal with live Socket.io updates and PostgreSQL synchronization.",
+  "requestFramePermissions": [
+    "microphone",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

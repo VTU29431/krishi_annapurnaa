@@ -1,0 +1,42 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Farmers collection
+    match /farmers/{farmerId} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(farmerId) || isSignedIn();
+    }
+
+    // Mandi tokens collection
+    match /mandi_tokens/{tokenId} {
+      allow read: if true;
+      allow create, update: if true;
+      allow delete: if false;
+    }
+
+    // AI Chat history
+    match /ai_chats/{chatId} {
+      allow read, write: if isSignedIn();
+    }
+
+    // Connection test collection
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+  }
+}

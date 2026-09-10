@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@keyframes popInSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.82);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-pop-in-slide-up {
+  animation: popInSlideUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.35s backwards;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 6mm 8mm;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Completely hide all elements on the webpage by default */
+  body * {
+    visibility: hidden !important;
+  }
+
+  /* Make ONLY the printable gate pass element and its contents visible */
+  #printable-gate-pass,
+  #printable-gate-pass * {
+    visibility: visible !important;
+  }
+
+  /* Position the printable pass cleanly at the top-left of the single printed page */
+  #printable-gate-pass {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 16px 20px !important;
+    border: 2px solid #064e3b !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+    page-break-inside: avoid !important;
+    page-break-after: avoid !important;
+    page-break-before: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Completely hide all navigation, headers, footers, sidebars, buttons, modals backdrops */
+  header,
+  nav,
+  footer,
+  aside,
+  button,
+  .no-print,
+  .no-print *,
+  [data-no-print="true"],
+  .modal-backdrop-print {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      (function() {
+        if (typeof window === 'undefined') return;
+
+        // Gracefully suppress benign preview / iframe / Vite HMR errors
+        window.addEventListener('error', function(event) {
+          var msg = event.message || '';
+          if (
+            msg === 'Script error.' ||
+            msg.indexOf('WebSocket') !== -1 ||
+            msg.indexOf('websocket') !== -1 ||
+            msg.indexOf('[vite]') !== -1
+          ) {
+            event.preventDefault();
+            return true;
+          }
+        }, true);
+
+        window.addEventListener('unhandledrejection', function(event) {
+          var r = event.reason;
+          var msg = typeof r === 'string' ? r : (r && (r.message || r.stack)) || String(r || '');
+          if (
+            msg.indexOf('WebSocket') !== -1 ||
+            msg.indexOf('websocket') !== -1 ||
+            msg.indexOf('closed without opened') !== -1 ||
+            msg.indexOf('[vite]') !== -1
+          ) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            return false;
+          }
+        }, true);
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Krishi Annapurna Realtime Procurement</title>
+    <meta name="description" content="Realtime agricultural procurement and queue management portal with live updates and cloud synchronization." />
+    <meta property="og:title" content="Krishi Annapurna Realtime Procurement" />
+    <meta property="og:description" content="Realtime agricultural procurement and queue management portal with live updates and cloud synchronization." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
